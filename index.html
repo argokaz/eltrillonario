@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Gasta la plata de Elon 💸</title>
+  <meta name="description" content="¿Cuánto dinero tiene un trillonario? Gástalo todo y descubre lo (im)posible que es vaciar su fortuna. Una mirada satírica a la desigualdad." />
+  <meta name="theme-color" content="#0b1020" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Gasta la plata de Elon 💸" />
+  <meta property="og:description" content="Gasta la fortuna de un trillonario... si puedes. Spoiler: el contador nunca para de subir." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💸</text></svg>" />
+</head>
+<body>
+
+  <!-- ===================== HEADER STICKY ===================== -->
+  <header class="hud" id="hud">
+    <div class="hud__inner">
+      <div class="hud__block hud__block--fortune">
+        <span class="hud__label">Fortuna de Elon 🚀</span>
+        <span class="hud__value" id="netWorth">$0</span>
+        <span class="hud__rate" id="rate">+$6,342 / segundo</span>
+      </div>
+      <div class="hud__block hud__block--spent">
+        <span class="hud__label">Has gastado</span>
+        <span class="hud__value hud__value--spent" id="spent">$0</span>
+        <span class="hud__rate" id="percent">0% de su fortuna</span>
+      </div>
+    </div>
+    <button class="hud__mute" id="muteBtn" aria-label="Silenciar sonido">🔊</button>
+    <div class="hud__progress"><div class="hud__progress-bar" id="progressBar"></div></div>
+  </header>
+
+  <div class="papel" aria-hidden="true"></div>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <div class="hero__glow"></div>
+
+    <!-- Caricatura de Elon: usa assets/elon.png; si no existe, cae al SVG -->
+    <div class="elon" id="elon" aria-hidden="true">
+      <img class="elon__img" id="elonImg" src="assets/elon.png" alt="Elon Musk con ojos de dólar"
+           onerror="this.style.display='none';document.getElementById('elonSvg').style.display='block';" />
+      <svg id="elonSvg" class="elon__svg" viewBox="0 0 260 300" xmlns="http://www.w3.org/2000/svg" style="display:none">
+        <defs>
+          <radialGradient id="skin" cx="50%" cy="40%" r="70%">
+            <stop offset="0%" stop-color="#ffe0c2"/>
+            <stop offset="100%" stop-color="#f3b98c"/>
+          </radialGradient>
+          <linearGradient id="suit" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1c2540"/>
+            <stop offset="100%" stop-color="#0d1326"/>
+          </linearGradient>
+        </defs>
+
+        <!-- cohete de fondo -->
+        <g class="elon__rocket">
+          <ellipse cx="215" cy="70" rx="14" ry="34" fill="#e8edff"/>
+          <path d="M201 70 q14 -46 28 0 z" fill="#cfd8ff"/>
+          <circle cx="215" cy="62" r="6" fill="#7aa2ff"/>
+          <path d="M201 86 q-10 8 0 18 q8 -6 8 -14 z" fill="#ff7a59"/>
+          <path d="M229 86 q10 8 0 18 q-8 -6 -8 -14 z" fill="#ff7a59"/>
+          <path class="elon__flame" d="M209 104 q6 26 6 34 q0 -8 6 -34 q-6 6 -12 0z" fill="#ffd24a"/>
+        </g>
+
+        <!-- cuerpo / traje -->
+        <path d="M70 300 q60 -70 120 0 z" fill="url(#suit)"/>
+        <path d="M118 250 l12 22 l12 -22 z" fill="#0d1326"/>
+        <rect x="123" y="250" width="14" height="40" rx="4" fill="#2a3450" />
+        <path d="M118 250 q12 30 12 30 q0 0 12 -30 z" fill="#ffffff" opacity="0.9"/>
+        <path d="M126 252 l4 34 l4 -34 l-4 -6 z" fill="#cf2b4a"/> <!-- corbata -->
+
+        <!-- cuello -->
+        <rect x="113" y="230" width="34" height="30" rx="14" fill="url(#skin)"/>
+
+        <!-- cabeza -->
+        <ellipse cx="130" cy="170" rx="70" ry="74" fill="url(#skin)"/>
+        <!-- pelo (entradas marcadas, satírico) -->
+        <path d="M64 150 q-2 -70 66 -78 q68 8 66 78 q-22 -36 -66 -34 q-44 -2 -66 34z" fill="#3a2c25"/>
+        <path d="M88 120 q42 -22 84 0 q-42 -8 -84 0z" fill="#2c211c"/>
+
+        <!-- cejas -->
+        <path d="M92 158 q16 -10 30 -2" stroke="#3a2c25" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M138 156 q16 -8 30 2" stroke="#3a2c25" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+        <!-- ojos con signo de dólar 🤑 -->
+        <g class="elon__eyes">
+          <circle cx="108" cy="172" r="16" fill="#fff"/>
+          <circle cx="152" cy="172" r="16" fill="#fff"/>
+          <text x="108" y="180" text-anchor="middle" font-size="22" font-weight="700" fill="#1f9d55" font-family="Space Grotesk, sans-serif">$</text>
+          <text x="152" y="180" text-anchor="middle" font-size="22" font-weight="700" fill="#1f9d55" font-family="Space Grotesk, sans-serif">$</text>
+        </g>
+
+        <!-- nariz -->
+        <path d="M130 178 q6 14 -2 22 q-6 2 -8 -2" stroke="#d99a6c" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+        <!-- sonrisa pícara -->
+        <path d="M100 210 q30 30 60 0" stroke="#a5552f" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M100 210 q30 30 60 0 q-30 6 -60 0z" fill="#fff"/>
+      </svg>
+    </div>
+
+    <div class="hero__badge">🏆 El primer TRILLONARIO de la historia</div>
+    <h1 class="hero__title">Gasta la plata de <span class="hero__name">Elon</span></h1>
+    <p class="hero__subtitle">
+      Acaba de llegar a <strong>un millón de millones de dólares</strong> 🤯.
+      Te damos su fortuna entera: compra todo lo que quieras…
+      <strong>si es que logras vaciarla.</strong> 👀
+    </p>
+
+    <div class="hero__ticker">
+      <div class="hero__ticker-item"><span id="perMin">$380,520</span><small>por minuto</small></div>
+      <div class="hero__ticker-item"><span id="perDay">$548 M</span><small>por día durmiendo</small></div>
+      <div class="hero__ticker-item"><span id="vsPeru">827×</span><small>el sueldo mensual peruano… por minuto</small></div>
+    </div>
+
+    <a href="#tienda" class="hero__cta">Empezar a gastar 💸</a>
+    <p class="hero__scroll">↓ desliza ↓</p>
+  </section>
+
+  <!-- ===================== PERSPECTIVA SUELDOS ===================== -->
+  <section class="context">
+    <h2 class="context__title">Para que tomes dimensión 🤏</h2>
+
+    <!-- Tarjetón: cuánto gana Elon por minuto -->
+    <div class="rate-card">
+      <div class="rate-card__bolt">⚡</div>
+      <div class="rate-card__body">
+        <span class="rate-card__num" id="rateBig">$380,520</span>
+        <span class="rate-card__label">es lo que Elon gana <b>cada minuto</b> 🤑</span>
+      </div>
+    </div>
+
+    <div class="oldman">
+      <span class="oldman__face">👴</span>
+      <p>
+        Este serás tú después de <b>~40 años</b> trabajando. Esto es lo que ganarás
+        en <b>TODA tu vida laboral</b>… y lo poquito que Elon tarda en igualarlo:
+      </p>
+    </div>
+
+    <div class="vs-list" id="salaries"><!-- inyectado por JS --></div>
+
+    <p class="context__foot">
+      No es talento sobrehumano: es un sistema donde el dinero llama al dinero.
+      Tú decides qué hacer con el de él. 👇
+    </p>
+  </section>
+
+  <!-- ===================== TIENDA ===================== -->
+  <main id="tienda" class="store">
+    <!-- categorías inyectadas por JS -->
+  </main>
+
+  <!-- ===================== CTA RECIBO ===================== -->
+  <section class="finale">
+    <h2 class="finale__title">¿Ya te cansaste de gastar?</h2>
+    <p class="finale__text">
+      Da igual cuánto compres: el contador de arriba <strong>nunca</strong> deja de subir.
+      Esa es justamente la idea.
+    </p>
+    <div class="finale__actions">
+      <button class="finale__btn" id="receiptBtn">Ver mi recibo 🧾</button>
+      <button class="finale__btn finale__btn--clear" id="clearBtn">Borrar compras 🗑️</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p class="footer__credit">
+      Creado por
+      <a href="https://www.instagram.com/arturogoga" target="_blank" rel="noopener">Arturo Goga</a>
+      <span class="footer__ig">📸</span>
+    </p>
+    <p>Hecho con 💸 y sátira. Cifras aproximadas con fines educativos.</p>
+    <p class="footer__small">Esto no es contra una persona, es contra un sistema donde unos pocos tienen más que países enteros.</p>
+  </footer>
+
+  <!-- ===================== MODAL RECIBO ===================== -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal__backdrop" id="modalBackdrop"></div>
+    <div class="printer-stage">
+      <div class="printer" aria-hidden="true">
+        <div class="printer__light"></div>
+        <div class="printer__brand">🖨️ ELON-PRINT 3000</div>
+        <div class="printer__slot"></div>
+      </div>
+      <div class="receipt" id="receipt" role="dialog" aria-modal="true" aria-label="Recibo de compra">
+      <button class="receipt__close no-capture" id="receiptClose" aria-label="Cerrar">✕</button>
+      <div class="receipt__head">
+        <h3>🧾 RECIBO OFICIAL</h3>
+        <p>GASTA LA PLATA DE ELON S.A.C.</p>
+        <p class="receipt__date" id="receiptDate"></p>
+      </div>
+      <ul class="receipt__items" id="receiptItems"></ul>
+      <div class="receipt__totals">
+        <div><span>Total gastado</span><span id="receiptTotal">$0</span></div>
+        <div><span>Fortuna restante</span><span id="receiptLeft">$0</span></div>
+        <div class="receipt__pct"><span>Porcentaje gastado</span><span id="receiptPct">0%</span></div>
+      </div>
+      <p class="receipt__punchline" id="receiptPunch"></p>
+      <div class="receipt__notes" id="receiptNotes"></div>
+      <p class="receipt__url">🌐 eltrillonario.com</p>
+      <p class="receipt__barcode">█║▌║▌║ 0000 ·· GRACIAS POR (NO) ARRUINARLO ·· ║▌║▌║█</p>
+      <div class="receipt__share no-capture">
+        <p class="receipt__share-title">Comparte tu recibo 📤</p>
+        <div class="share-row">
+          <button class="share-btn share-btn--wa" id="shareWa" aria-label="Compartir por WhatsApp">🟢<span>WhatsApp</span></button>
+          <button class="share-btn share-btn--fb" id="shareFb" aria-label="Compartir por Facebook">🔵<span>Facebook</span></button>
+          <button class="share-btn share-btn--ig" id="shareIg" aria-label="Compartir por Instagram">🟣<span>Instagram</span></button>
+          <button class="share-btn share-btn--dl" id="shareDl" aria-label="Descargar imagen">⬇️<span>Imagen</span></button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mensaje sarcástico de Elon (compra bloqueada) -->
+  <div class="elon-toast" id="elonToast" hidden>
+    <img class="elon-toast__face" id="elonToastFace" src="assets/elon.png" alt="Elon" />
+    <div class="elon-toast__bubble" id="elonToastMsg"></div>
+  </div>
+
+  <!-- capa de confeti -->
+  <canvas id="confetti" class="confetti"></canvas>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+  <script src="js/data.js"></script>
+  <script src="js/sound.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
