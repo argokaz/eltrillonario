@@ -213,6 +213,7 @@ h1, h2, h3, .hud__value, .rate-card__num, .vs__mult { font-family: "Fredoka", sy
   font-size: 1.18rem; font-variant-numeric: tabular-nums;
   line-height: 1.1; white-space: nowrap;
 }
+.card__mag { font-size: .74rem; color: var(--ink-soft); margin-top: -2px; font-style: italic; }
 .card__price.is-med { font-size: .96rem; }   /* miles de millones */
 .card__price.is-xl  { font-size: .82rem; }   /* billones (12+ dígitos) */
 @media (min-width: 920px) {
@@ -255,6 +256,22 @@ h1, h2, h3, .hud__value, .rate-card__num, .vs__mult { font-family: "Fredoka", sy
   box-shadow: 0 8px 0 rgba(0,0,0,.35), var(--shadow);
 }
 .finale__btn--clear:active { transform: translateY(5px); box-shadow: 0 3px 0 rgba(0,0,0,.35), var(--shadow); }
+
+.finale__cta {
+  margin-top: 22px; font-family: "Fredoka", sans-serif; font-size: 1.15rem; color: var(--ink);
+}
+.finale__cta a {
+  color: transparent; font-weight: 700; text-decoration: none; white-space: nowrap;
+  background: linear-gradient(90deg, var(--pink), var(--gold)); -webkit-background-clip: text; background-clip: text;
+  border-bottom: 2px solid var(--pink); padding-bottom: 1px;
+}
+.finale__cta a:active { opacity: .7; }
+
+.build-tag {
+  position: fixed; left: 8px; bottom: 6px; z-index: 60; pointer-events: none;
+  font-family: monospace; font-size: .62rem; letter-spacing: .03em;
+  color: var(--ink); opacity: .25;
+}
 
 .footer { text-align: center; padding: 28px 18px 60px; color: var(--ink-soft); font-size: .95rem; }
 .footer__credit { font-family: "Fredoka", sans-serif; font-size: 1.15rem; margin-bottom: 12px; }

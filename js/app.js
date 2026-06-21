@@ -16,6 +16,14 @@
   // -------- Helpers de formato --------
   const fmtFull = n => "$" + Math.floor(n).toLocaleString("en-US");
 
+  // Etiqueta de magnitud para identificar de un vistazo el tamaño del gasto.
+  function magLabel(n) {
+    if (n >= 1e12) return "billones";
+    if (n >= 1e9) return "mil millones";
+    if (n >= 1e6) return "millones";
+    return "";
+  }
+
   function fmtShort(n) {
     const abs = Math.abs(n);
     if (abs >= 1e12) return "$" + (n / 1e12).toFixed(2) + " B"; // billón (millón de millones)
@@ -200,6 +208,7 @@
         <div class="card__name">${it.name}</div>
         <div class="card__note">${it.note}</div>
         <div class="card__price ${it.price >= 1e12 ? "is-xl" : it.price >= 1e9 ? "is-med" : ""}">${fmtFull(it.price)}</div>
+        ${magLabel(it.price) ? `<div class="card__mag">(${magLabel(it.price)})</div>` : ""}
         <div class="card__actions">
           <button class="card__remove" data-act="sub" data-id="${it.id}" aria-label="Quitar uno">−</button>
           <button class="card__add" data-act="add" data-id="${it.id}">
@@ -443,6 +452,8 @@
   addEventListener("keydown", e => { if (e.key === "Escape" && !modal.hidden) closeReceipt(); });
 
   // -------- Init --------
+  const buildTag = $("#buildTag");
+  if (buildTag) buildTag.textContent = "build " + (window.__BUILD__ || "dev");
   renderHeroTicker();
   renderSalaries();
   renderStore();
