@@ -433,6 +433,7 @@
   $("#receiptBtn").addEventListener("click", openReceipt);
   $("#clearBtn").addEventListener("click", clearAll);
   $("#receiptClose").addEventListener("click", closeReceipt);
+  $("#receiptCloseBottom").addEventListener("click", closeReceipt);
   $("#modalBackdrop").addEventListener("click", closeReceipt);
   $("#shareWa").addEventListener("click", shareWhatsApp);
   $("#shareFb").addEventListener("click", shareFacebook);
