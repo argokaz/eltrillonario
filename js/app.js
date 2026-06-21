@@ -40,6 +40,8 @@
   const percentEl = $("#percent");
   const progressBar = $("#progressBar");
   const rateEl = $("#rate");
+  const fabReceipt = $("#fabReceipt");
+  const fabLabel = $("#fabLabel");
 
   // ============================================================
   //  CONTADOR EN TIEMPO REAL (la fortuna nunca para de subir)
@@ -67,6 +69,7 @@
     const pct = (spent / netWorth) * 100;
     percentEl.textContent = (pct < 0.01 && spent > 0 ? "menos de 0.01" : pct.toFixed(pct < 1 ? 3 : 1)) + "% de su fortuna";
     progressBar.style.width = Math.min(pct, 100) + "%";
+    if (fabLabel) fabLabel.textContent = spent > 0 ? "Recibo · " + fmtShort(spent) : "Ver recibo";
     if (pulse) {
       spentEl.classList.remove("bump"); void spentEl.offsetWidth; spentEl.classList.add("bump");
     }
@@ -440,7 +443,20 @@
   //  WIRING
   // ============================================================
   $("#receiptBtn").addEventListener("click", openReceipt);
+  fabReceipt.addEventListener("click", openReceipt);
   $("#clearBtn").addEventListener("click", clearAll);
+
+  // Oculta el FAB cuando la sección final (con su propio botón "Ver mi recibo")
+  // ya entró en pantalla, para no duplicar el botón.
+  const finaleEl = document.querySelector(".finale");
+  function updateFabVisibility() {
+    if (!finaleEl) return;
+    const top = finaleEl.getBoundingClientRect().top;
+    fabReceipt.classList.toggle("fab-hide", top < window.innerHeight * 0.9);
+  }
+  addEventListener("scroll", updateFabVisibility, { passive: true });
+  addEventListener("resize", updateFabVisibility);
+  updateFabVisibility();
   $("#receiptClose").addEventListener("click", closeReceipt);
   $("#receiptCloseBottom").addEventListener("click", closeReceipt);
   $("#modalBackdrop").addEventListener("click", closeReceipt);
