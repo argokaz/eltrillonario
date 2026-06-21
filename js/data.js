@@ -46,7 +46,7 @@ const CATEGORIES = [
     items: [
       { id: "tesla3",     emoji: "🚙", name: "Un Tesla Model 3",             price: 42000, note: "Para apoyar al jefe… aunque prometió que ya se manejaría solo." },
       { id: "byd",        emoji: "🚗", name: "Un BYD (eléctrico chino)",     price: 35000, note: "El auto que Elon finge que no existe… y que ya le gana a Tesla. 🤫" },
-      { id: "macbook-neo",emoji: "💻", name: "MacBook Neo",                  price: 3499,  note: "El modelo que Apple aún no anuncia y que tú ya quieres. 🍏" },
+      { id: "macbook-neo",emoji: "💻", name: "MacBook Neo",                  price: 599,   note: "La MacBook más barata de Apple. Para él, propina; para ti, meses de ahorro. 🍏" },
       { id: "rtx5090",    emoji: "🟩", name: "Tarjeta gráfica RTX 5090",     price: 1999,  note: "Para correr videojuegos en 8K mientras el mundo arde." },
       { id: "rimowa",     emoji: "🧳", name: "Maleta Rimowa de aluminio",    price: 1600,  note: "Para llevar tus problemas en primera clase." },
       { id: "bigmac",   emoji: "🍔", name: "Un Big Mac",            price: 5,     note: "El famoso Índice Big Mac. Para él, ni una migaja." },
@@ -73,7 +73,7 @@ const CATEGORIES = [
       { id: "birkin",   emoji: "👜", name: "Bolso Birkin de Hermès",     price: 25000,     note: "Una cartera que cuesta más que una casa en provincia." },
       { id: "chanel",   emoji: "👛", name: "Bolso Chanel Classic Flap",  price: 11000,     note: "Cuero, cadena dorada y el precio de un auto usado." },
       { id: "balenciaga",emoji: "🗑️", name: "Bolsa de basura Balenciaga", price: 1790,     note: "Sí, existe y costó $1,790. La moda riéndose en tu cara." },
-      { id: "purosangue",emoji: "🏎️", name: "Ferrari Purosangue (el SUV)", price: 430000,   note: "El Ferrari que indignó a los puristas: una camioneta de lujo." },
+      { id: "ferrari-luce",emoji: "🏎️", name: "Ferrari Luce (el eléctrico)", price: 1000000, note: "El primer Ferrari 100% eléctrico y de 5 asientos: 1,035 hp, 0–100 en 2.5s y un diseño que dividió al mundo." },
       { id: "f1-paddock",emoji: "🏁", name: "Paddock Club F1 en Mónaco",   price: 25000,     note: "Champagne viendo autos dar vueltas. El lujo de no hacer nada." },
       { id: "rolex",    emoji: "⌚", name: "Rolex de oro",               price: 40000,     note: "Un reloj para mirar cómo pasa el tiempo de los demás." },
       { id: "miraflores",emoji: "🏖️", name: "Casa de lujo en Miraflores (Lima)", price: 2200000, note: "Residencia frente al malecón, en el distrito más caro del Perú." },
